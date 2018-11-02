@@ -35,6 +35,8 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings {
          * Save WooCommerce Parcelas Meta Box
          */
         add_action('save_post', array($this, 'save_fswp_product_meta_box'));
+
+	add_action('woocommerce_product_options_general_product_data', [$this, 'fswp_general_custom_fields']);
     }
 
     /**
@@ -74,6 +76,13 @@ class Woocommerce_Parcelas_Meta_Box extends Woocommerce_Parcelas_Settings {
                 )
             )
         );
+    }
+
+    public function fswp_general_custom_fields()
+    {
+        global $woocommerce, $post;
+
+        include_once WC_PARCELAS_PATH . 'admin/views/html-product-custom-fields.php';
     }
 
     public function fswp_product_meta_box_callback($post, $metabox)
